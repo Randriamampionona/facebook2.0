@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "javascript.suggest.autoImports": true,
+    "javascript.suggest.includeCompletionsForImportStatements": true,
+    "editor.tabSize": 3,
+    "prettier.tabWidth": 3,
+    "tailwindCSS.emmetCompletions": true
+}

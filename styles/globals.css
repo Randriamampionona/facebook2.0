@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	*,
+	*::after,
+	*::before {
+		@apply p-0 m-0 box-border font-default;
+	}
+
+	html,
+	body {
+		@apply bg-dark text-textWhite;
+	}
+}
+
+@layer components {
+	.inputReset {
+		@apply bg-transparent text-textLight placeholder:text-textLight text-sm outline-none border-0;
+	}
+
+	.headerMenuIcon {
+		@apply relative px-[1.1rem] py-2 rounded-md cursor-pointer md:px-7 lg:px-9;
+	}
+
+	.mySection {
+		@apply flex items-start justify-between h-auto w-full 2xl:w-[100rem] 2xl:mx-auto;
+	}
+}
+
+/* scrollbar */
+body::-webkit-scrollbar {
+	width: 9px;
+}
+body::-webkit-scrollbar-thumb {
+	background: #686868a6;
+}
+body::-webkit-scrollbar-thumb:hover {
+	background: #686868;
+}
+body::-webkit-scrollbar-track {
+	background: #424242a4;
+}
+
+#asideScrollbar {
+	overflow-y: overlay;
+}
+
+#asideScrollbar::-webkit-scrollbar,
+#homeRightSide::-webkit-scrollbar {
+	width: 9px;
+	display: none;
+}
+#asideScrollbar:hover::-webkit-scrollbar,
+#homeRightSide:hover::-webkit-scrollbar {
+	width: 9px;
+	display: block;
+}
+#asideScrollbar::-webkit-scrollbar-thumb,
+#homeRightSide::-webkit-scrollbar-thumb {
+	background: #686868a6;
+}
+#asideScrollbar::-webkit-scrollbar-thumb:hover,
+#homeRightSide::-webkit-scrollbar-thumb:hover {
+	background: #686868;
+}
+#asideScrollbar::-webkit-scrollbar-track,
+#homeRightSide::-webkit-scrollbar-track {
+	background: #424242a4;
+}
+
+.rigthGradient::after {
+	background: linear-gradient(275deg, #242526, transparent);
+}
+
+.bottomGradient::after {
+	background: linear-gradient(0deg, #000000d6, transparent);
+}
+
+.topProfileGradient::after {
+	background: linear-gradient(0deg, #242526, #242526, transparent);
+}
