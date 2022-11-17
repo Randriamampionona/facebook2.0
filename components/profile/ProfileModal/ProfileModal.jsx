@@ -3,16 +3,16 @@ import { GlobalContext } from "../../../store/contexts/GlobalContext";
 import Bio from "./Bio";
 import ModalHeader from "./ModalHeader";
 import Buttons from "./Buttons";
-import { ProfileContextLocal } from "../../../store/contexts/locales/ProfileContext.local";
 import Details from "./Details";
 import Hobbies from "./Hobbies";
+import { LocalContext } from "../../../store/contexts/LocalContext";
 
 const ProfileModal = ({ form }) => {
 	const { toogleProfileModal } = GlobalContext();
 	const {
 		DATA: { infos },
 		editFunc,
-	} = ProfileContextLocal();
+	} = LocalContext();
 
 	const [values, setValues] = useState({
 		isLoading: false,
@@ -47,9 +47,7 @@ const ProfileModal = ({ form }) => {
 				<ModalHeader />
 
 				{/* bio */}
-				{form === "bio" && (
-					<Bio values={values} changeValHandler={changeValHandler} />
-				)}
+				{form === "bio" && <Bio values={values} setValues={setValues} />}
 
 				{/* details */}
 				{form === "details" && (

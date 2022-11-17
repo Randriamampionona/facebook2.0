@@ -15,8 +15,8 @@ const handler = async (req, res) => {
 	methodErrorHandler?.(req, res, "POST");
 
 	const { promiseConn } = req.con;
-	const user_ID = idGenerator?.(6);
-	const row_ID = idGenerator?.(6);
+	const user_ID = idGenerator();
+	const row_ID = idGenerator();
 	const { firstName, lastName, email, birthday, password } = req.body;
 	const username = `${firstName} ${lastName}`;
 

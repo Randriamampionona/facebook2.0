@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { useCallback } from "react";
-import { ProfileContextLocal } from "../../../store/contexts/locales/ProfileContext.local";
+import { LocalContext } from "../../../store/contexts/LocalContext";
 
 const Photos = () => {
 	const {
 		DATA: { posts },
-	} = ProfileContextLocal();
+	} = LocalContext();
 
 	const photoHandler = useCallback(() => {
 		return posts

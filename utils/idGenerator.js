@@ -1,7 +1,5 @@
-const idGenerator = (length) => {
-	return require("crypto")
-		.randomBytes((length ||= 30))
-		.toString("hex");
+const idGenerator = () => {
+	return require("crypto").randomBytes(5).toString("hex");
 };
 
 export default idGenerator;

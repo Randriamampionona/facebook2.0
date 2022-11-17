@@ -135,7 +135,7 @@ LeftAside.defaultProps = {
 		{
 			slug: "/only-girls",
 			textLink: "Only Girls 🔥",
-			imgIco: "/assets/your-shortcuts-img/Only Girls 🔥.png",
+			imgIco: "/assets/your-shortcuts-img/Only-Girls.png",
 			lastActive: "about an hour ago",
 			isPinned: true,
 		},

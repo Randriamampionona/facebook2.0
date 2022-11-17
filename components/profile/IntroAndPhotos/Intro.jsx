@@ -1,13 +1,13 @@
 import { Fragment } from "react";
 import { FaHouseUser, FaMapMarkedAlt, FaHeart, FaRss } from "react-icons/fa";
 import { GlobalContext } from "../../../store/contexts/GlobalContext";
-import { ProfileContextLocal } from "../../../store/contexts/locales/ProfileContext.local";
+import { LocalContext } from "../../../store/contexts/LocalContext";
 import hobbiesList from "../hobbiesList";
 
 const Intro = () => {
 	const {
 		DATA: { currentUser, infos },
-	} = ProfileContextLocal();
+	} = LocalContext();
 
 	return (
 		<div className="px-4 rounded-md w-full bg-semiDark">

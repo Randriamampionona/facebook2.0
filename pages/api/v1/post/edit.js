@@ -9,12 +9,26 @@ const handler = async (req, res) => {
 	methodErrorHandler?.(req, res, "PATCH");
 
 	const { promiseConn } = req.con;
-	const { post_ID, description } = req.body;
+	const {
+		post_ID,
+		post: { type, content },
+		confidentiality,
+		description,
+	} = req.body;
+
+	// format content
+	const formatedContent = () => {
+		if (type === "text") {
+			return JSON.stringify(content);
+		}
+
+		return content;
+	};
 
 	const querys = {
 		editPost: {
-			q: "UPDATE user_posts SET description = ? WHERE post_ID = ?",
-			data: [description, post_ID],
+			q: "UPDATE user_posts SET confidentiality= ?, description = ?, content = ? WHERE post_ID = ?",
+			data: [confidentiality, description, formatedContent(), post_ID],
 		},
 	};
 

@@ -64,15 +64,13 @@ const Middle = ({ navMenu }) => {
 				</Link>
 
 				{/* burger menu */}
-				<Link href="/">
-					<li className="group headerMenuIcon text-textLight hover:bg-hoverDark lg:hidden">
-						<Icons.MoreIcon />
+				<li className="group headerMenuIcon text-textLight hover:bg-hoverDark lg:hidden">
+					<Icons.MoreIcon />
 
-						<span className="absolute -bottom-9 left-1/2 -translate-x-1/2 bg-textWhite text-dark text-xs px-3 py-[0.4375rem] rounded-md hidden group-hover:block">
-							More
-						</span>
-					</li>
-				</Link>
+					<span className="absolute -bottom-9 left-1/2 -translate-x-1/2 bg-textWhite text-dark text-xs px-3 py-[0.4375rem] rounded-md hidden group-hover:block">
+						More
+					</span>
+				</li>
 			</ul>
 		</div>
 	);

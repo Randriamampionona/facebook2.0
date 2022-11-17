@@ -87,7 +87,7 @@ CreateRoom.defaultProps = {
 		{
 			id: 10,
 			name: "Mãc Jācky",
-			profile: "/assets/user-profile-img/Mãc Jācky.png",
+			profile: "/assets/user-profile-img/Mac-Jacky.png",
 		},
 		{
 			id: 11,
@@ -102,7 +102,7 @@ CreateRoom.defaultProps = {
 		{
 			id: 13,
 			name: "Lutécianne RM",
-			profile: "/assets/user-profile-img/Lutécianne RM.png",
+			profile: "/assets/user-profile-img/Lutecianne-RM.png",
 		},
 		{
 			id: 14,
@@ -117,7 +117,7 @@ CreateRoom.defaultProps = {
 		{
 			id: 16,
 			name: "Rōsåh La Blanche",
-			profile: "/assets/user-profile-img/Rōsåh La Blanche.png",
+			profile: "/assets/user-profile-img/Rosah-La-Blanche.png",
 		},
 		{
 			id: 17,

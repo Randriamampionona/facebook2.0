@@ -43,30 +43,35 @@ body::-webkit-scrollbar-track {
 	background: #424242a4;
 }
 
-#asideScrollbar {
+#asideScrollbar, #emoji {
 	overflow-y: overlay;
 }
 
 #asideScrollbar::-webkit-scrollbar,
-#homeRightSide::-webkit-scrollbar {
+#homeRightSide::-webkit-scrollbar,
+#emoji::-webkit-scrollbar {
 	width: 9px;
 	display: none;
 }
 #asideScrollbar:hover::-webkit-scrollbar,
-#homeRightSide:hover::-webkit-scrollbar {
+#homeRightSide:hover::-webkit-scrollbar,
+#emoji:hover::-webkit-scrollbar {
 	width: 9px;
 	display: block;
 }
 #asideScrollbar::-webkit-scrollbar-thumb,
-#homeRightSide::-webkit-scrollbar-thumb {
+#homeRightSide::-webkit-scrollbar-thumb,
+#emoji::-webkit-scrollbar-thumb {
 	background: #686868a6;
 }
 #asideScrollbar::-webkit-scrollbar-thumb:hover,
-#homeRightSide::-webkit-scrollbar-thumb:hover {
+#homeRightSide::-webkit-scrollbar-thumb:hover,
+#emoji::-webkit-scrollbar-thumb:hover {
 	background: #686868;
 }
 #asideScrollbar::-webkit-scrollbar-track,
-#homeRightSide::-webkit-scrollbar-track {
+#homeRightSide::-webkit-scrollbar-track,
+#emoji::-webkit-scrollbar-track {
 	background: #424242a4;
 }
 

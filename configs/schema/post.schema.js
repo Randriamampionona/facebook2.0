@@ -31,6 +31,15 @@ class Post {
 			return responseDB?.user_ID === loggedInUser_ID;
 		};
 
+		// format content
+		const formatedContent = (type, content) => {
+			if (type === "text") {
+				return JSON.parse(content);
+			}
+
+			return content;
+		};
+
 		this.#post_ID = responseDB?.post_ID;
 		this.#owner = {
 			user_ID: responseDB?.user_ID,
@@ -43,7 +52,7 @@ class Post {
 			date: new Date(responseDB?.date),
 			confidentiality: responseDB?.confidentiality,
 			description: responseDB?.description,
-			content: responseDB?.content,
+			content: formatedContent(responseDB?.type, responseDB?.content),
 			reactHint: {
 				hasReacted,
 				react: lastClickedReaction,

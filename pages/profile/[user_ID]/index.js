@@ -7,14 +7,18 @@ import {
 import apiEndpoint from "../../../utils/apiEndpoint";
 import verifyAuth from "../../../utils/verifyAuth";
 import axios from "axios";
-import { ProfileProviderLocal } from "../../../store/contexts/locales/ProfileContext.local";
 import { GlobalContext } from "../../../store/contexts/GlobalContext";
+import { AuthContext } from "../../../store/contexts/AuthContext";
+import { LocalProvider } from "../../../store/contexts/LocalContext";
+import { UploadModal } from "../../../components/common";
 
 const ProfilePage = ({ DATA }) => {
-	const { modal } = GlobalContext();
+	const { modal, uploadModale } = GlobalContext();
+	const { user } = AuthContext();
 
 	return (
-		<ProfileProviderLocal DATA={DATA}>
+		<LocalProvider DATA={DATA}>
+			{user && uploadModale.open && <UploadModal />}
 			<section className="mySection flex-col">
 				{/* modale */}
 				{modal.open && DATA.currentUser.isMine && (
@@ -27,7 +31,7 @@ const ProfilePage = ({ DATA }) => {
 					<SettingsAndPosts />
 				</main>
 			</section>
-		</ProfileProviderLocal>
+		</LocalProvider>
 	);
 };
 
@@ -64,7 +68,7 @@ export const getServerSideProps = async ({ req, params }) => {
 	} catch (error) {
 		console.log({ error });
 		return {
-			DATA: {},
+			DATA: null,
 		};
 	}
 };

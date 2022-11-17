@@ -11,7 +11,7 @@ const handler = async (req, res) => {
 	methodErrorHandler?.(req, res, "POST");
 
 	const { promiseConn } = req.con;
-	const row_ID = idGenerator?.(6);
+	const row_ID = idGenerator();
 
 	const {
 		user_ID,
@@ -24,10 +24,26 @@ const handler = async (req, res) => {
 		description,
 	} = req.body;
 
+	// format content
+	const formatedContent = () => {
+		if (type === "text") {
+			return JSON.stringify(content);
+		}
+
+		return content;
+	};
+
 	const querys = {
 		addPost: {
 			q: "INSERT INTO user_posts SET post_ID = ?, user_ID = ?, type = ?, date = DEFAULT, confidentiality = ?, description = ?, content = ?, reactions = DEFAULT, shares = DEFAULT",
-			data: [row_ID, user_ID, type, confidentiality, description, content],
+			data: [
+				row_ID,
+				user_ID,
+				type,
+				confidentiality,
+				description,
+				formatedContent(),
+			],
 		},
 	};
 
@@ -42,7 +58,7 @@ const handler = async (req, res) => {
 			date: new Date(),
 			confidentiality,
 			description,
-			content,
+			content: formatedContent(),
 			reactions: JSON.stringify({
 				like: [],
 				care: [],

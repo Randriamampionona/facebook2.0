@@ -14,7 +14,7 @@ const handler = async (req, res) => {
 		},
 
 		getPosts: {
-			q: "SELECT up.post_ID, up.type, up.date, up.confidentiality, up.description, up.content, up.reactions, up.shares, u.user_ID, u.username, upc.profile_picture AS profile FROM user_posts up JOIN users u USING(user_ID) JOIN user_pictures upc USING(user_ID) WHERE user_ID = ? LIMIT 10",
+			q: "SELECT up.post_ID, up.type, up.date, up.confidentiality, up.description, up.content, up.reactions, up.shares, u.user_ID, u.username, upc.profile_picture AS profile FROM user_posts up JOIN users u USING(user_ID) JOIN user_pictures upc USING(user_ID) WHERE user_ID = ? ORDER BY up.date DESC LIMIT 10",
 			data: [user_ID],
 		},
 	};

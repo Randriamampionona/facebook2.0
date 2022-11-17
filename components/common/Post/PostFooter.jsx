@@ -1,34 +1,29 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 import { IoMdShare } from "react-icons/io";
 import { reactIcons } from "../../icons/ReactIcon";
 import formatNumber from "../../../utils/formatNumber";
-import { ProfileContextLocal } from "../../../store/contexts/locales/ProfileContext.local";
-import { HomeContextLocal } from "../../../store/contexts/locales/HomeContext.local";
-import { useRouter } from "next/router";
+import { LocalContext } from "../../../store/contexts/LocalContext";
+import { AnimatePresence, motion } from "framer-motion";
+import motionVariants from "./motionVariants";
 
-const PostFooter = ({ post_ID, count, reactHint, btnsData, reactionBtns }) => {
-	const { reactFunc: ProfileReactFunc } = ProfileContextLocal();
-	const { reactFunc: HomeReactFunc } = HomeContextLocal();
-	const { pathname } = useRouter();
-	const [showReactionBtns, setShowReactionBtns] = useState(false);
+const PostFooter = (props) => {
+	const {
+		post_ID,
+		count,
+		reactHint,
+		showReactionBtns,
+		setShowReactionBtns,
+		btnsData,
+		reactionBtns,
+	} = props;
+	const { reactFunc } = LocalContext();
+	// const [showReactionBtns, setShowReactionBtns] = useState(false);
 
 	const reactHandler = async (react_ID) => {
-		pathname === "/home"
-			? HomeReactFunc({ react_ID, post_ID })
-			: pathname.includes("/profile")
-			? ProfileReactFunc({ react_ID, post_ID })
-			: undefined;
+		reactFunc({ react_ID, post_ID });
+		setShowReactionBtns(false);
 	};
-
-	// useEffect(() => {
-	// 	const timiID = setTimeout(
-	// 		() => setShowReactionBtns((prev) => !!prev && false),
-	// 		7000
-	// 	);
-
-	// 	return () => clearTimeout(timiID);
-	// }, [showReactionBtns]);
 
 	return (
 		<div className="relative px-3 divide-y divide-hoverDark">
@@ -79,20 +74,26 @@ const PostFooter = ({ post_ID, count, reactHint, btnsData, reactionBtns }) => {
 			</div>
 
 			{/* reactions btns */}
-			{showReactionBtns && (
-				<div
-					className="absolute bottom-12 left-3 flex items-center justify-center gap-x-1 bg-dark p-1 rounded-full shadow-blockShadow"
-					onMouseLeave={() => setShowReactionBtns(false)}>
-					{reactionBtns?.map((r) => (
-						<button
-							key={r}
-							className="transition-[scale] hover:scale-125"
-							onClick={(e) => reactHandler(r)}>
-							<Fragment>{reactIcons?.(r, 0, 32, 32)}</Fragment>
-						</button>
-					))}
-				</div>
-			)}
+			<AnimatePresence exitBeforeEnter>
+				{showReactionBtns && (
+					<motion.div
+						variants={motionVariants.fadesDown}
+						initial="initial"
+						animate="animate"
+						exit="exit"
+						className="absolute bottom-12 left-3 flex items-center justify-center gap-x-1 bg-dark p-1 rounded-full shadow-blockShadow"
+						onMouseLeave={() => setShowReactionBtns(false)}>
+						{reactionBtns?.map((r) => (
+							<button
+								key={r}
+								className="transition-[scale] hover:scale-125"
+								onClick={(e) => reactHandler(r)}>
+								<Fragment>{reactIcons?.(r, 0, 32, 32)}</Fragment>
+							</button>
+						))}
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

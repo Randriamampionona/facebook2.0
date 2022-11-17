@@ -1,14 +1,15 @@
-import { PostBody, PostFooter, PostHead } from "./../../common/Post";
+import { LocalContext } from "../../../store/contexts/LocalContext";
+import { Post } from "./../../common/Post";
 
-const GamingFeeds = ({ gamingFeedsList }) => {
+const GamingFeeds = () => {
+	const {
+		DATA: { posts },
+	} = LocalContext();
+
 	return (
 		<div className="space-y-4">
-			{gamingFeedsList?.map((feed) => (
-				<div key={feed.id} className="bg-semiDark min-w-full rounded-md">
-					<PostHead owner={feed.owner} post={feed.post} />
-					<PostBody post={feed.post} postType="video" />
-					<PostFooter count={feed.count} />
-				</div>
+			{posts?.map((item) => (
+				<Post key={item.post_ID} {...item} />
 			))}
 		</div>
 	);

@@ -1,15 +1,9 @@
-import React from "react";
 import GamingFeeds from "./GamingFeeds";
 import LiveSlides from "./LiveSlides";
 import Menu from "./Menu";
 import RecentActivity from "./RecentActivity";
 
-const GamingContainer = ({
-	menuList,
-	liveSlidesList,
-	recentActivityList,
-	gamingFeedsList,
-}) => {
+const GamingContainer = ({ menuList, liveSlidesList, recentActivityList }) => {
 	return (
 		<main className="relative w-full lg:max-w-[calc(100%-22.625rem)]">
 			<Menu menuList={menuList} />
@@ -17,7 +11,7 @@ const GamingContainer = ({
 
 			<div className="w-full max-w-[calc(100%-2rem)] mx-auto my-8 space-y-8 xl:max-w-[calc(100%-12rem)]">
 				<RecentActivity recentActivityList={recentActivityList} />
-				<GamingFeeds gamingFeedsList={gamingFeedsList} />
+				<GamingFeeds />
 			</div>
 		</main>
 	);
@@ -129,80 +123,6 @@ GamingContainer.defaultProps = {
 			id: "bvcbxdb1",
 			name: "Viva La Dirt League",
 			profile: "/assets/user-profile-img/Viva La Dirt League.png",
-		},
-	],
-
-	gamingFeedsList: [
-		{
-			id: 1,
-			owner: {
-				userID: "dfd5fd1f5dfd2",
-				profile: "/assets/user-profile-img/Viva La Dirt League.png",
-				name: "Viva La Dirt League",
-			},
-			post: {
-				type: "public",
-				date: new Date(),
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolore ratione voluptates doloremque",
-				img: "/assets/feed-img/pain.png",
-			},
-			count: {
-				likes: {
-					length: 525485,
-					react: ["like", "heart", "wow"],
-				},
-				comments: 7115,
-				shares: 75052,
-			},
-		},
-
-		{
-			id: 2,
-			owner: {
-				userID: "kh85g8se85sv",
-				profile: "/assets/user-profile-img/Xzit Thamer.png",
-				name: "Xzit Thamer",
-			},
-			post: {
-				type: "public",
-				date: new Date(),
-				description:
-					"Lorem ipsum dolor, sit amet consectetur adipisicing elit",
-				img: "/assets/feed-img/1641847503523.jpg",
-			},
-			count: {
-				likes: {
-					length: 2487754,
-					react: ["like", "haha"],
-				},
-				comments: 65844,
-				shares: 415447,
-			},
-		},
-
-		{
-			id: 3,
-			owner: {
-				userID: "qedz85ds5d8",
-				profile: "/assets/user-profile-img/OoopsSorry Gaming.png",
-				name: "OoopsSorry Gaming",
-			},
-			post: {
-				type: "public",
-				date: new Date(),
-				description:
-					"Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde cum quidem sunt!",
-				img: "/assets/feed-img/alexandre-lallemand-UtPC_kz8CAc-unsplash.jpg",
-			},
-			count: {
-				likes: {
-					length: 84884,
-					react: ["wow", "heart", "like"],
-				},
-				comments: 2144,
-				shares: 1577,
-			},
 		},
 	],
 };

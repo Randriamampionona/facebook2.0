@@ -95,7 +95,7 @@ Suggestion.defaultProps = {
 		{
 			id: "df5d8fdx5",
 			name: "Only Girls 🔥",
-			img: "/assets/your-shortcuts-img/Only Girls 🔥.png",
+			img: "/assets/your-shortcuts-img/Only-Girls.png",
 			member: 5848475,
 			dynamic: "15+ post a day",
 		},

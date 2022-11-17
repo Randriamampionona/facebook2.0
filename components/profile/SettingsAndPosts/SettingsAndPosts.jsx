@@ -1,4 +1,4 @@
-import { ProfileContextLocal } from "../../../store/contexts/locales/ProfileContext.local";
+import { LocalContext } from "../../../store/contexts/LocalContext";
 import { PostForm } from "../../common/Post";
 import * as Icons from "../../icons/Icons";
 import PostList from "./PostList";
@@ -7,12 +7,12 @@ import Settings from "./Settings";
 const SettingsAndPosts = ({ postType }) => {
 	const {
 		DATA: { currentUser },
-	} = ProfileContextLocal();
+	} = LocalContext();
 
 	return (
 		<div className="flex flex-col items-start gap-y-4 w-full">
 			{/* post form */}
-			<PostForm postType={postType} />
+			{currentUser.isMine && <PostForm postType={postType} />}
 
 			{/* parametre */}
 			<Settings isMine={currentUser.isMine} />
@@ -26,17 +26,17 @@ const SettingsAndPosts = ({ postType }) => {
 SettingsAndPosts.defaultProps = {
 	postType: [
 		{
-			id: 1,
+			id: "video",
 			text: "Live video",
 			Icon: Icons.LiveVideoIcon,
 		},
 		{
-			id: 2,
+			id: "photo",
 			text: "Photo/video",
 			Icon: Icons.PhotoVideoIcon,
 		},
 		{
-			id: 3,
+			id: "text",
 			text: "Life event",
 			Icon: Icons.LifeEventIcon,
 		},

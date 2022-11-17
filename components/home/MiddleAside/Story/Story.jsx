@@ -59,7 +59,7 @@ Story.defaultProps = {
 		},
 		{
 			id: 2,
-			profileImg: "/assets/user-profile-img/Lutécianne RM.png",
+			profileImg: "/assets/user-profile-img/Lutecianne-RM.png",
 			name: "Lutécianne RM",
 			storyImg: "/assets/story-img/cat.jpg",
 		},
@@ -95,7 +95,7 @@ Story.defaultProps = {
 		},
 		{
 			id: 8,
-			profileImg: "/assets/user-profile-img/Rōsåh La Blanche.png",
+			profileImg: "/assets/user-profile-img/Rosah-La-Blanche.png",
 			name: "Rōsåh La Blanche",
 			storyImg:
 				"/assets/story-img/pexels-katarzyna-modrzejewska-1314550.jpg",

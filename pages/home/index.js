@@ -1,18 +1,26 @@
 import axios from "axios";
+import { UploadModal } from "../../components/common";
 import { LeftAside, MiddleAside, RightAside } from "../../components/home";
-import { HomeProviderLocal } from "../../store/contexts/locales/HomeContext.local";
+import { AuthContext } from "../../store/contexts/AuthContext";
+import { GlobalContext } from "../../store/contexts/GlobalContext";
+import { LocalProvider } from "../../store/contexts/LocalContext";
 import apiEndpoint from "../../utils/apiEndpoint";
 import verifyAuth from "../../utils/verifyAuth";
 
 const Home = ({ DATA }) => {
+	const { uploadModale } = GlobalContext();
+	const { user } = AuthContext();
+
 	return (
-		<HomeProviderLocal DATA={DATA}>
+		<LocalProvider DATA={DATA}>
+			{user && uploadModale.open && <UploadModal />}
+
 			<section className="mySection">
 				<LeftAside />
 				<MiddleAside />
 				<RightAside />
 			</section>
-		</HomeProviderLocal>
+		</LocalProvider>
 	);
 };
 
@@ -48,7 +56,7 @@ export const getServerSideProps = async ({ req }) => {
 	} catch (error) {
 		console.log({ error });
 		return {
-			infosData: {},
+			DATA: null,
 		};
 	}
 };

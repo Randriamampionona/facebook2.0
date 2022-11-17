@@ -1,4 +1,8 @@
-import { TOOGLE_PROFILE_MENU, TOOGLE_PROFILE_MODAL } from "../actions/actions";
+import {
+	TOOGLE_PROFILE_MENU,
+	TOOGLE_PROFILE_MODAL,
+	TOOGLE_UPLOAD_MODAL,
+} from "../actions/actions";
 
 const globalReducer = (state, action) => {
 	switch (action.type) {
@@ -14,6 +18,16 @@ const globalReducer = (state, action) => {
 				modal: {
 					open: !state.modal.open,
 					form: action.payload,
+				},
+			};
+
+		case TOOGLE_UPLOAD_MODAL:
+			return {
+				...state,
+				uploadModale: {
+					...action.payload,
+					open: !state.uploadModale.open,
+					type: action.payload.type,
 				},
 			};
 

@@ -50,7 +50,7 @@ MarketContainer.defaultProps = {
 					name: "✨CASQUE FILAIRE DM-4600 --MORA BEE!💵",
 					price: 25000,
 					location: "Antananarivo, Madagascar",
-					img: "/assets/market-img/✨CASQUE FILAIRE DM-4600 --MORA BEE!💵.png",
+					img: "/assets/market-img/CASQUE-FILAIRE-DM-4600-MORA BEE!.png",
 				},
 				{
 					id: "fz8qzfse5v",
@@ -91,7 +91,7 @@ MarketContainer.defaultProps = {
 					name: "Xiaomi Mi 12 Pro Europe🇫🇷",
 					price: 1502000,
 					location: "Antananarivo",
-					img: "/assets/market-img/Xiaomi Mi 12 Pro Europe🇫🇷.png",
+					img: "/assets/market-img/XiaomiMiProEurope.png",
 				},
 				{
 					id: "dge4dxv",

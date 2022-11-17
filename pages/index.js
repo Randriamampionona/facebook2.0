@@ -6,14 +6,19 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import VerifyAuth from "../utils/verifyAuth";
 
-const AuthorizationPage = ({ langList, links }) => {
-	const { query } = useRouter();
+const AuthorizationPage = ({ langList, links, user }) => {
+	const { query, replace } = useRouter();
 	const [openForm, setOpenForm] = useState(false);
 	const toogleHandler = (key) => setOpenForm(key);
 
 	useEffect(() => {
 		query && query.p === "signup" && toogleHandler(true);
 	}, []);
+
+	// client redirect
+	useEffect(() => {
+		replace("/home");
+	}, [user]);
 
 	return (
 		<section className="w-full text-dark bg-whiteBg">

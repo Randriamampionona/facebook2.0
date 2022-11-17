@@ -13,7 +13,7 @@ const LeftAside = ({ menus, shortcuts, footerMenus }) => {
 			<ul>
 				{/* profile */}
 				<li>
-					<Link href="/profile">
+					<Link href={"/profile/me?p=posts"}>
 						<div className="flex items-center space-x-2 w-full cursor-pointer py-1 px-2 rounded-md hover:bg-hoverDark">
 							<Image
 								src={user.pictures.profile}
@@ -166,7 +166,7 @@ LeftAside.defaultProps = {
 		{
 			slug: "/only-girls",
 			textLink: "Only Girls 🔥",
-			imgIco: "/assets/your-shortcuts-img/Only Girls 🔥.png",
+			imgIco: "/assets/your-shortcuts-img/Only-Girls.png",
 		},
 		{
 			slug: "/gasy-dev-javascript",

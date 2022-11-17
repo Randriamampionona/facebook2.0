@@ -4,5 +4,6 @@
     "javascript.suggest.includeCompletionsForImportStatements": true,
     "editor.tabSize": 3,
     "prettier.tabWidth": 3,
-    "tailwindCSS.emmetCompletions": true
+    "tailwindCSS.emmetCompletions": true,
+    "eslint.alwaysShowStatus": true
 }

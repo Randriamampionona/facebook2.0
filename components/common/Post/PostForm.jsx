@@ -1,9 +1,15 @@
 import Image from "next/image";
 import * as Icons from "../../icons/Icons";
 import { AuthContext } from "../../../store/contexts/AuthContext";
+import { GlobalContext } from "../../../store/contexts/GlobalContext";
 
 const PostForm = ({ postType }) => {
+	const { toogleUploadModal } = GlobalContext();
 	const { user: loggedInUser } = AuthContext();
+
+	const openUploadModalHandler = (type) => {
+		toogleUploadModal?.({ type });
+	};
 
 	return (
 		<section className="bg-semiDark p-3 rounded-md space-y-2 w-full">
@@ -37,8 +43,9 @@ const PostForm = ({ postType }) => {
 					<div
 						key={item.id}
 						className={`flex-grow flex-shrink flex-wrap flex items-center justify-center gap-2 p-2 rounded-md cursor-pointer hover:bg-lightDark ${
-							item.id == 3 ? "hidden sm:flex" : ""
-						}`}>
+							item.id == "text" ? "hidden sm:flex" : ""
+						}`}
+						onClick={(e) => openUploadModalHandler(item.id)}>
 						<span>
 							<item.Icon />
 						</span>
@@ -53,17 +60,17 @@ const PostForm = ({ postType }) => {
 PostForm.defaultProps = {
 	postType: [
 		{
-			id: 1,
+			id: "video",
 			text: "Live video",
 			Icon: Icons.LiveVideoIcon,
 		},
 		{
-			id: 2,
+			id: "photo",
 			text: "Photo/video",
 			Icon: Icons.PhotoVideoIcon,
 		},
 		{
-			id: 3,
+			id: "text",
 			text: "Feeling/activity",
 			Icon: Icons.FeelingActivityIcon,
 		},

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { ProfileContextLocal } from "../../../store/contexts/locales/ProfileContext.local";
+import { LocalContext } from "../../../store/contexts/LocalContext";
 import BasicInfoBlock from "./BasicInfoBlock";
 import Blurness from "./Blurness";
 import CoverPicBlock from "./CoverPicBlock";
@@ -9,7 +9,7 @@ import MenuBlock from "./MenuBlock";
 const TopProfile = () => {
 	const {
 		DATA: { currentUser },
-	} = ProfileContextLocal();
+	} = LocalContext();
 	const [offsetHeight, setOffsetHeight] = useState({ oh1: 0, oh2: 0 });
 	const [isFixed, setIsFixed] = useState(false);
 

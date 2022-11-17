@@ -13,9 +13,7 @@ const handler = async (req, res) => {
 	const { p: page } = req.query;
 
 	const postType = () => {
-		return page === "home"
-			? "WHERE up.type = 'photo' OR up.type = 'text'"
-			: page === "gaming"
+		return page === "gaming"
 			? "WHERE up.type != 'photo' AND up.type != 'text'"
 			: page === "watch"
 			? "WHERE up.type != 'photo' AND up.type != 'text'"
@@ -24,7 +22,7 @@ const handler = async (req, res) => {
 
 	const querys = {
 		getPosts: {
-			q: `SELECT up.post_ID, up.type, up.date, up.confidentiality, up.description, up.content, up.reactions, up.shares, u.user_ID, u.username, upc.profile_picture AS profile FROM user_posts up JOIN users u USING(user_ID) JOIN user_pictures upc USING(user_ID) ${postType()} LIMIT 10`,
+			q: `SELECT up.post_ID, up.type, up.date, up.confidentiality, up.description, up.content, up.reactions, up.shares, u.user_ID, u.username, upc.profile_picture AS profile FROM user_posts up JOIN users u USING(user_ID) JOIN user_pictures upc USING(user_ID) ${postType()} ORDER BY up.date DESC LIMIT 10`,
 		},
 	};
 

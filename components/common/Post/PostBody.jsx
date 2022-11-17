@@ -7,9 +7,16 @@ const PostBody = ({ post, postType }) => {
 			{postType === "text" && (
 				<div
 					className="flex items-center justify-center w-full h-48"
-					style={{ background: post.content }}>
-					<p className="w-full max-w-[75%] text-center font-bold">
-						{post.description}
+					style={{ background: post.content.bg }}>
+					<p
+						className="w-full max-w-[75%] text-center font-bold"
+						style={{ color: post.content.color }}>
+						{/* {post.description} */}
+						<span
+							dangerouslySetInnerHTML={{
+								__html: post.description,
+							}}
+						/>
 					</p>
 				</div>
 			)}

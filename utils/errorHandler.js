@@ -1,6 +1,6 @@
 export const apiErrorHandler = (res, status, error) => {
-	// console.log({ error });
-	const isLow = error?.code === "PROTOCOL_SEQUENCE_TIMEOUT" || "ETIMEDOUT";
+	const isLow = error?.code === "ETIMEDOUT";
+	// console.log({ error, isLow });
 
 	res.status(isLow ? 408 : status).json({
 		error: true,
