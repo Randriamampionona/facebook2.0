@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { SigninForm, SignupForm } from "../components/authorization";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import VerifyAuth from "../utils/verifyAuth";
+import { SigninForm, SignupForm } from "./../components/authorization";
+import VerifyAuth from "./../utils/verifyAuth";
 
 const AuthorizationPage = ({ langList, links, user }) => {
 	const { query, replace } = useRouter();

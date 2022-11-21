@@ -20,6 +20,10 @@ const useReact = () => {
 				return result.snapshot;
 			}
 		} catch (error) {
+			if (error?.response?.data?.error) {
+				return toastHandler?.("error", error?.response?.data?.message);
+			}
+
 			console.log(error);
 		}
 	};

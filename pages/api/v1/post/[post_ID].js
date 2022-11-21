@@ -5,6 +5,7 @@ import {
 	apiErrorHandler,
 	methodErrorHandler,
 } from "../../../../utils/errorHandler";
+import checkPost from "../../../../middlewares/checkPost";
 
 const handler = async (req, res) => {
 	methodErrorHandler?.(req, res, "GET");
@@ -42,4 +43,4 @@ const handler = async (req, res) => {
 	}
 };
 
-export default checkConnection?.(checkAuth?.(handler));
+export default checkConnection?.(checkAuth?.(checkPost?.(handler)));

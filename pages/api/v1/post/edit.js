@@ -1,5 +1,6 @@
 import checkAuth from "../../../../middlewares/checkAuth";
 import checkConnection from "../../../../middlewares/checkConnection";
+import checkPost from "../../../../middlewares/checkPost";
 import {
 	apiErrorHandler,
 	methodErrorHandler,
@@ -51,4 +52,4 @@ const handler = async (req, res) => {
 	}
 };
 
-export default checkConnection?.(checkAuth?.(handler));
+export default checkConnection?.(checkAuth?.(checkPost?.(handler)));

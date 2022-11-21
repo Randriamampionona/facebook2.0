@@ -15,7 +15,7 @@ const localReducer = (state, action) => {
 					...state.DATA,
 					infos: {
 						...state.DATA.infos,
-						...action.payload,
+						...action?.payload,
 					},
 				},
 			};
@@ -26,19 +26,19 @@ const localReducer = (state, action) => {
 				DATA: {
 					...state.DATA,
 					posts: state.DATA.posts?.map((post) => {
-						if (post.post_ID === action.payload.post_ID) {
+						if (post.post_ID === action?.payload?.post_ID) {
 							return {
 								...post,
 								count: {
 									...post.count,
 									likesCount: {
-										...action.payload.likesCount,
+										...action?.payload?.likesCount,
 									},
 								},
 
 								post: {
 									...post.post,
-									reactHint: action.payload.reactHint,
+									reactHint: action?.payload?.reactHint,
 								},
 							};
 						}
@@ -53,7 +53,7 @@ const localReducer = (state, action) => {
 				...state,
 				DATA: {
 					...state.DATA,
-					posts: [action.payload, ...state.DATA.posts],
+					posts: [action?.payload, ...state.DATA.posts],
 				},
 			};
 		}
@@ -64,15 +64,15 @@ const localReducer = (state, action) => {
 				DATA: {
 					...state.DATA,
 					posts: state.DATA.posts?.map((post) => {
-						if (post.post_ID === action.payload?.post_ID) {
+						if (post.post_ID === action?.payload?.post_ID) {
 							return {
 								...post,
 								post: {
 									...post.post,
-									description: action.payload.description,
-									type: action.payload.post.type,
-									confidentiality: action.payload.confidentiality,
-									content: action.payload.post.content,
+									description: action?.payload?.description,
+									type: action?.payload?.post.type,
+									confidentiality: action?.payload?.confidentiality,
+									content: action?.payload?.post.content,
 								},
 							};
 						}
@@ -89,7 +89,7 @@ const localReducer = (state, action) => {
 				DATA: {
 					...state.DATA,
 					posts: state.DATA.posts?.filter(
-						(p) => p.post_ID !== action.payload.post_ID
+						(p) => p.post_ID !== action?.payload?.post_ID
 					),
 				},
 			};

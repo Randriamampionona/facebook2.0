@@ -3,9 +3,9 @@ import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 import { IoMdShare } from "react-icons/io";
 import { reactIcons } from "../../icons/ReactIcon";
 import formatNumber from "../../../utils/formatNumber";
-import { LocalContext } from "../../../store/contexts/LocalContext";
 import { AnimatePresence, motion } from "framer-motion";
 import motionVariants from "./motionVariants";
+import { LocalContext } from "../../../store/contexts/LocalContext";
 
 const PostFooter = (props) => {
 	const {
@@ -18,7 +18,6 @@ const PostFooter = (props) => {
 		reactionBtns,
 	} = props;
 	const { reactFunc } = LocalContext();
-	// const [showReactionBtns, setShowReactionBtns] = useState(false);
 
 	const reactHandler = async (react_ID) => {
 		reactFunc({ react_ID, post_ID });

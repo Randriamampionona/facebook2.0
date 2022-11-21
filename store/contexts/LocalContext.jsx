@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import localReducer from "../reducers/localReducer";
 import {
 	useDelete,
 	useEdit,
@@ -6,7 +7,6 @@ import {
 	useReact,
 	useUploadPost,
 } from "../../hooks";
-import localReducer from "../reducers/localReducer";
 import {
 	DELETE_POST,
 	EDIT_POST,
