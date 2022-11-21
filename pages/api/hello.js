@@ -11,7 +11,7 @@ const handler = async (req, res) => {
 		// get something in DB
 		const users = await promiseConn.query("SELECT * FROM users");
 
-		res.status(200).json({ success: true, users });
+		res.status(200).json({ success: true, users: users[0] });
 	} catch (error) {
 		apiErrorHandler?.(res, 500, error);
 	}
