@@ -1,17 +1,16 @@
 import axios from "axios";
+import { Fragment } from "react";
 import { GamingContainer, LeftAside } from "../../components/gaming";
-import { LocalProvider } from "../../store/contexts/LocalContext";
-import apiEndpoint from "../../utils/apiEndpoint";
 import verifyAuth from "../../utils/verifyAuth";
 
-const GaminPage = ({ DATA }) => {
+const GaminPage = () => {
 	return (
-		<LocalProvider DATA={DATA}>
+		<Fragment>
 			<section className="mySection">
 				<LeftAside />
 				<GamingContainer />
 			</section>
-		</LocalProvider>
+		</Fragment>
 	);
 };
 
@@ -26,9 +25,10 @@ export const getServerSideProps = async ({ req }) => {
 		};
 	}
 
+	const URL = `/post?p=watch`;
+
 	try {
-		const url = apiEndpoint?.(`/post?p=watch`);
-		const fetch = await axios.get(url, {
+		const fetch = await axios.get(URL, {
 			withCredentials: true,
 			headers: {
 				user_id: auth?.props?.user?.user_ID,
@@ -40,14 +40,19 @@ export const getServerSideProps = async ({ req }) => {
 			return {
 				props: {
 					...auth.props,
-					DATA: result.payload,
+					mutateKey: URL,
+					fallback: {
+						[URL]: result,
+					},
 				},
 			};
 		}
 	} catch (error) {
-		console.log({ error });
 		return {
-			DATA: null,
+			...auth.props,
+			fallback: {
+				[URL]: null,
+			},
 		};
 	}
 };

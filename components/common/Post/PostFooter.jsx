@@ -1,11 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { FiThumbsUp, FiMessageSquare } from "react-icons/fi";
 import { IoMdShare } from "react-icons/io";
 import { reactIcons } from "../../icons/ReactIcon";
 import formatNumber from "../../../utils/formatNumber";
 import { AnimatePresence, motion } from "framer-motion";
 import motionVariants from "./motionVariants";
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useReact } from "../../../hooks";
 
 const PostFooter = (props) => {
 	const {
@@ -17,10 +17,11 @@ const PostFooter = (props) => {
 		btnsData,
 		reactionBtns,
 	} = props;
-	const { reactFunc } = LocalContext();
+	const { react: reactFunc } = useReact();
 
 	const reactHandler = async (react_ID) => {
-		reactFunc({ react_ID, post_ID });
+		await reactFunc({ react_ID, post_ID });
+
 		setShowReactionBtns(false);
 	};
 

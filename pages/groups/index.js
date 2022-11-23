@@ -1,25 +1,23 @@
 import axios from "axios";
-import React from "react";
+import React, { Fragment } from "react";
 import { GroupContainer, LeftAside } from "../../components/group";
-import { LocalProvider } from "../../store/contexts/LocalContext";
-import apiEndpoint from "../../utils/apiEndpoint";
-import VerifyAuth from "../../utils/verifyAuth";
+import verifyAuth from "../../utils/verifyAuth";
 
-const GroupsPage = ({ DATA }) => {
+const GroupsPage = () => {
 	return (
-		<LocalProvider DATA={DATA}>
+		<Fragment>
 			<section className="mySection">
 				<LeftAside />
 				<GroupContainer />
 			</section>
-		</LocalProvider>
+		</Fragment>
 	);
 };
 
 export default GroupsPage;
 
 export const getServerSideProps = async ({ req }) => {
-	const auth = await VerifyAuth?.(req);
+	const auth = await verifyAuth?.(req);
 
 	if (auth.redirect) {
 		return {
@@ -27,9 +25,10 @@ export const getServerSideProps = async ({ req }) => {
 		};
 	}
 
+	const URL = `/post?p=group`;
+
 	try {
-		const url = apiEndpoint?.(`/post?p=group`);
-		const fetch = await axios.get(url, {
+		const fetch = await axios.get(URL, {
 			withCredentials: true,
 			headers: {
 				user_id: auth?.props?.user?.user_ID,
@@ -41,14 +40,19 @@ export const getServerSideProps = async ({ req }) => {
 			return {
 				props: {
 					...auth.props,
-					DATA: result.payload,
+					mutateKey: URL,
+					fallback: {
+						[URL]: result,
+					},
 				},
 			};
 		}
 	} catch (error) {
-		console.log({ error });
 		return {
-			DATA: null,
+			...auth.props,
+			fallback: {
+				[URL]: null,
+			},
 		};
 	}
 };

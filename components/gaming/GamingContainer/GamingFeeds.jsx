@@ -1,14 +1,12 @@
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useGetPageData } from "../../../hooks";
 import { Post } from "./../../common/Post";
 
 const GamingFeeds = () => {
-	const {
-		DATA: { posts },
-	} = LocalContext();
+	const { data } = useGetPageData();
 
 	return (
 		<div className="space-y-4">
-			{posts?.map((item) => (
+			{data?.payload?.posts?.map((item) => (
 				<Post key={item.post_ID} {...item} />
 			))}
 		</div>

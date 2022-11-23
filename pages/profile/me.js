@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Fragment } from "react";
 import { UploadModal } from "../../components/common";
 import {
 	IntroAndPhotos,
@@ -8,22 +9,18 @@ import {
 } from "../../components/profile";
 import { AuthContext } from "../../store/contexts/AuthContext";
 import { GlobalContext } from "../../store/contexts/GlobalContext";
-import { LocalProvider } from "../../store/contexts/LocalContext";
-import apiEndpoint from "../../utils/apiEndpoint";
-import VerifyAuth from "../../utils/verifyAuth";
+import verifyAuth from "../../utils/verifyAuth";
 
-const ProfilePage = ({ DATA }) => {
+const ProfilePage = () => {
 	const { modal, uploadModale } = GlobalContext();
 	const { user } = AuthContext();
 
 	return (
-		<LocalProvider DATA={DATA}>
+		<Fragment>
 			{user && uploadModale.open && <UploadModal />}
 			<section className="mySection flex-col">
 				{/* modale */}
-				{modal.open && DATA.currentUser.isMine && (
-					<ProfileModal form={modal.form} />
-				)}
+				{modal.open && <ProfileModal form={modal.form} />}
 				<TopProfile />
 
 				<main className="flex flex-col items-start justify-between gap-y-8 py-4 w-[calc(100%-3rem)] max-w-full mx-auto sm:max-w-[80%] md:max-w-[70%] lg:flex-row lg:gap-x-4 lg:max-w-[80%] lg:px-5 xl:max-w-[70%]">
@@ -31,14 +28,14 @@ const ProfilePage = ({ DATA }) => {
 					<SettingsAndPosts />
 				</main>
 			</section>
-		</LocalProvider>
+		</Fragment>
 	);
 };
 
 export default ProfilePage;
 
 export const getServerSideProps = async ({ req }) => {
-	const auth = await VerifyAuth?.(req);
+	const auth = await verifyAuth?.(req);
 
 	if (auth.redirect) {
 		return {
@@ -46,9 +43,10 @@ export const getServerSideProps = async ({ req }) => {
 		};
 	}
 
+	const URL = `/info/${auth.props.user.user_ID}`;
+
 	try {
-		const url = apiEndpoint?.(`/info/${auth.props.user.user_ID}`);
-		const fetch = await axios.get(url, {
+		const fetch = await axios.get(URL, {
 			withCredentials: true,
 			headers: {
 				user_id: auth?.props?.user?.user_ID,
@@ -60,14 +58,19 @@ export const getServerSideProps = async ({ req }) => {
 			return {
 				props: {
 					...auth.props,
-					DATA: result.payload,
+					mutateKey: URL,
+					fallback: {
+						[URL]: result,
+					},
 				},
 			};
 		}
 	} catch (error) {
-		console.log({ error });
 		return {
-			DATA: null,
+			...auth.props,
+			fallback: {
+				[URL]: null,
+			},
 		};
 	}
 };

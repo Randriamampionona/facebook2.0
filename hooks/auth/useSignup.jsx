@@ -45,7 +45,7 @@ const useSignup = () => {
 		setData((prev) => ({ ...prev, loading: true }));
 
 		try {
-			const url = apiEndpoint?.("/authorization/signup");
+			const url = "/authorization/signup";
 			const fecth = await axios.post(url, data, { withCredentials: true });
 			const result = fecth.data;
 

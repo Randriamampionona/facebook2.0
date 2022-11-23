@@ -5,14 +5,16 @@ import ModalHeader from "./ModalHeader";
 import Buttons from "./Buttons";
 import Details from "./Details";
 import Hobbies from "./Hobbies";
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useEdit, useGetPageData } from "../../../hooks";
 
 const ProfileModal = ({ form }) => {
 	const { toogleProfileModal } = GlobalContext();
 	const {
-		DATA: { infos },
-		editFunc,
-	} = LocalContext();
+		data: {
+			payload: { infos },
+		},
+	} = useGetPageData();
+	const { edit: editFunc } = useEdit();
 
 	const [values, setValues] = useState({
 		isLoading: false,

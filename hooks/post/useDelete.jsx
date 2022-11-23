@@ -1,13 +1,16 @@
-import apiEndpoint from "../../utils/apiEndpoint";
 import axios from "axios";
+import { mutate } from "swr";
+import { GlobalContext } from "../../store/contexts/GlobalContext";
 import toastHandler from "../../utils/toastHandler";
 
 const useDelete = () => {
+	const { mutateKey } = GlobalContext();
+
 	const deletePost = async (data, setValues) => {
 		setValues(true);
 
 		try {
-			const url = apiEndpoint?.("/post/delete");
+			const url = "/post/delete";
 			const fetch = await axios.delete(url, {
 				withCredentials: true,
 				headers: {
@@ -19,7 +22,7 @@ const useDelete = () => {
 			if (result.success) {
 				toastHandler?.("success", result.message);
 
-				return result.snapshot;
+				mutate(mutateKey);
 			}
 		} catch (error) {
 			if (error?.response?.data?.error) {

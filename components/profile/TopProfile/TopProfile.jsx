@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useGetPageData } from "../../../hooks";
 import BasicInfoBlock from "./BasicInfoBlock";
 import Blurness from "./Blurness";
 import CoverPicBlock from "./CoverPicBlock";
@@ -8,8 +8,8 @@ import MenuBlock from "./MenuBlock";
 
 const TopProfile = () => {
 	const {
-		DATA: { currentUser },
-	} = LocalContext();
+		data: { payload },
+	} = useGetPageData();
 	const [offsetHeight, setOffsetHeight] = useState({ oh1: 0, oh2: 0 });
 	const [isFixed, setIsFixed] = useState(false);
 
@@ -29,27 +29,27 @@ const TopProfile = () => {
 			}`}>
 			{/* cover pic */}
 			<CoverPicBlock
-				img={currentUser.pictures.cover}
-				alt={currentUser.username}
-				isMine={currentUser.isMine}
+				img={payload.currentUser.pictures.cover}
+				alt={payload.currentUser.username}
+				isMine={payload.currentUser.isMine}
 				setOffsetHeight={setOffsetHeight}
 			/>
 
 			{/* blurness */}
 			<Blurness
-				img={currentUser.pictures.cover}
-				alt={currentUser.username}
+				img={payload.currentUser.pictures.cover}
+				alt={payload.currentUser.username}
 			/>
 
 			{/* pdp name and stuff */}
 			<BasicInfoBlock
-				user={currentUser}
-				isMine={currentUser.isMine}
+				user={payload.currentUser}
+				isMine={payload.currentUser.isMine}
 				setOffsetHeight={setOffsetHeight}
 			/>
 
 			{/* menu section */}
-			<MenuBlock user={currentUser} isFixed={isFixed} />
+			<MenuBlock user={payload.currentUser} isFixed={isFixed} />
 		</main>
 	);
 };

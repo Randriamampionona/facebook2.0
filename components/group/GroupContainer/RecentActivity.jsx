@@ -1,16 +1,14 @@
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useGetPageData } from "../../../hooks";
 import { Post } from "./../../common/Post";
 
 const RecentActivity = () => {
-	const {
-		DATA: { posts },
-	} = LocalContext();
+	const { data } = useGetPageData();
 
 	return (
 		<div className="space-y-4 mt-2 mx-auto">
 			<p className="text-sm text-textLight">Recent activity</p>
 
-			{posts?.map((p) => {
+			{data?.payload?.posts?.map((p) => {
 				const item = {
 					...p,
 					ownerType: "group", //just for the test

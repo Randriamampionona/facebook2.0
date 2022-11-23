@@ -9,3 +9,5 @@ export { default as useReact } from "./post/useReact";
 export { default as useUploadPost } from "./post/useUploadPost";
 export { default as useEditPost } from "./post/useEditPost";
 export { default as useDelete } from "./post/useDelete";
+
+export { default as useGetPageData } from "./pages/useGetPageData";

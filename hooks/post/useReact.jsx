@@ -1,11 +1,14 @@
 import axios from "axios";
-import apiEndpoint from "../../utils/apiEndpoint";
+import { mutate } from "swr";
+import { GlobalContext } from "../../store/contexts/GlobalContext";
 import toastHandler from "../../utils/toastHandler";
 
 const useReact = () => {
+	const { mutateKey } = GlobalContext();
+
 	const react = async (DATA) => {
 		try {
-			const url = apiEndpoint?.(`/post/react?r=${DATA.react_ID}`);
+			const url = `/post/react?r=${DATA.react_ID}`;
 			const fetch = await axios.patch(url, null, {
 				withCredentials: true,
 				headers: {
@@ -17,7 +20,7 @@ const useReact = () => {
 			if (result.success) {
 				toastHandler?.("success", result.message);
 
-				return result.snapshot;
+				mutate(mutateKey);
 			}
 		} catch (error) {
 			if (error?.response?.data?.error) {

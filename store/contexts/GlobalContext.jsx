@@ -7,6 +7,7 @@ import {
 import globalReducer from "./../reducers/globalReducer";
 
 const initState = {
+	mutateKey: null,
 	isProfileMenuOpen: false,
 	modal: {
 		open: false,
@@ -20,8 +21,10 @@ const initState = {
 
 const Context = createContext(initState);
 
-export const GlobalProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(globalReducer, initState);
+export const GlobalProvider = ({ children, mutateKey }) => {
+	const [state, dispatch] = useReducer(globalReducer, {
+		...initState,
+	});
 
 	const toogleProfileMenu = (key) => {
 		dispatch({
@@ -45,6 +48,7 @@ export const GlobalProvider = ({ children }) => {
 	};
 
 	const values = {
+		mutateKey,
 		isProfileMenuOpen: state.isProfileMenuOpen,
 		modal: state.modal,
 		uploadModale: state.uploadModale,

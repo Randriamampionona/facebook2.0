@@ -1,13 +1,13 @@
 import { Fragment } from "react";
 import { FaHouseUser, FaMapMarkedAlt, FaHeart, FaRss } from "react-icons/fa";
+import { useGetPageData } from "../../../hooks";
 import { GlobalContext } from "../../../store/contexts/GlobalContext";
-import { LocalContext } from "../../../store/contexts/LocalContext";
 import hobbiesList from "../hobbiesList";
 
 const Intro = () => {
 	const {
-		DATA: { currentUser, infos },
-	} = LocalContext();
+		data: { payload },
+	} = useGetPageData();
 
 	return (
 		<div className="px-4 rounded-md w-full bg-semiDark">
@@ -16,13 +16,15 @@ const Intro = () => {
 
 			<div
 				className={`w-full ${
-					currentUser.isMine ? "" : "divide-y divide-lightDark/60"
+					payload.currentUser.isMine ? "" : "divide-y divide-lightDark/60"
 				}`}>
 				{/* bio */}
 				<div className="w-full pt-4">
-					<p className="text-center pt-8 pb-12">{`🍂 ${infos.bio} 🍂`}</p>
+					<p className="text-center pt-8 pb-12">{`🍂 ${payload.infos.bio} 🍂`}</p>
 
-					{currentUser.isMine && <IntroBtn id="bio" text={"Edit bio"} />}
+					{payload.currentUser.isMine && (
+						<IntroBtn id="bio" text={"Edit bio"} />
+					)}
 				</div>
 
 				{/* location and other */}
@@ -34,7 +36,9 @@ const Intro = () => {
 							</span>
 							<p className="text-sm">
 								Lives in{" "}
-								<span className="font-semibold">{infos.city}</span>
+								<span className="font-semibold">
+									{payload.infos.city}
+								</span>
 							</p>
 						</li>
 
@@ -44,7 +48,9 @@ const Intro = () => {
 							</span>
 							<p className="text-sm">
 								From{" "}
-								<span className="font-semibold">{infos.country}</span>
+								<span className="font-semibold">
+									{payload.infos.country}
+								</span>
 							</p>
 						</li>
 
@@ -52,7 +58,7 @@ const Intro = () => {
 							<span className="text-xl">
 								<FaHeart />
 							</span>
-							<p className="text-sm">{infos.loveCituation}</p>
+							<p className="text-sm">{payload.infos.loveCituation}</p>
 						</li>
 
 						<li className="flex items-center gap-x-2 text-textLight">
@@ -65,7 +71,7 @@ const Intro = () => {
 							</p>
 						</li>
 					</ul>
-					{currentUser.isMine && (
+					{payload.currentUser.isMine && (
 						<IntroBtn id="details" text={"Edit details"} />
 					)}
 				</div>
@@ -73,10 +79,10 @@ const Intro = () => {
 				{/* hobbies */}
 				<div
 					className={`w-full space-y-4 ${
-						currentUser.isMine ? "pb-4" : "py-4"
+						payload.currentUser.isMine ? "pb-4" : "py-4"
 					}`}>
 					<ul className="flex items-center flex-wrap gap-2">
-						{infos.hobbies?.map((hobbie) => (
+						{payload.infos.hobbies.map((hobbie) => (
 							<li
 								key={hobbie}
 								className="text-sm font-semibold px-3 py-2 text-textLight border border-lightDark rounded-full cursor-default select-none">
@@ -84,13 +90,13 @@ const Intro = () => {
 							</li>
 						))}
 					</ul>
-					{currentUser.isMine && (
+					{payload.currentUser.isMine && (
 						<IntroBtn id="hobbies" text={"Edit hobbies"} />
 					)}
 				</div>
 
 				{/* add featured */}
-				{currentUser.isMine && (
+				{payload.currentUser.isMine && (
 					<div className="w-full pb-4">
 						<button className="flex items-center justify-center gap-x-2 text-textWhite rounded-md w-full h-[2.2rem] bg-lightDark">
 							<span className="text-sm font-semibold">Add featured</span>

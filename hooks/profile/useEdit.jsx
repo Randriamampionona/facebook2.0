@@ -1,10 +1,11 @@
 import axios from "axios";
+import { mutate } from "swr";
 import { GlobalContext } from "../../store/contexts/GlobalContext";
-import apiEndpoint from "./../../utils/apiEndpoint";
 import toastHandler from "./../../utils/toastHandler";
 
 const useEdit = () => {
 	const {
+		mutateKey,
 		modal: { form: column },
 		toogleProfileModal,
 	} = GlobalContext();
@@ -16,14 +17,15 @@ const useEdit = () => {
 		}));
 
 		try {
-			const url = apiEndpoint?.(`/info/update?c=${column}`);
+			const url = `/info/update?c=${column}`;
 			const fetch = await axios.patch(url, data, { withCredentials: true });
 			const result = fetch.data;
 
 			if (result.success) {
 				toastHandler?.("success", result.message);
 				toogleProfileModal(false);
-				return result.snapshot;
+
+				mutate(mutateKey);
 			}
 		} catch (error) {
 			console.log(error);

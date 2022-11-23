@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { useCallback } from "react";
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useGetPageData } from "../../../hooks";
 
 const Photos = () => {
 	const {
-		DATA: { posts },
-	} = LocalContext();
+		data: { payload },
+	} = useGetPageData();
 
 	const photoHandler = useCallback(() => {
-		return posts
+		return payload.posts
 			?.filter((p) => p.post.type != "video" && p.post.type != "text")
 			?.slice(0, 3);
-	}, [posts]);
+	}, [payload.posts]);
 
 	return (
 		<div className="space-y-1 p-4 rounded-md w-full bg-semiDark">

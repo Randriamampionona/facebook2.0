@@ -5,7 +5,7 @@ import MediaInput from "./MediaInput";
 import ModalHeader from "./ModalHeader";
 import SubmitBtn from "./SubmitBtn";
 import TextInput from "./TextInput";
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useEditPost, useUploadPost } from "../../../hooks";
 
 const initStates = {
 	content: null,
@@ -18,7 +18,8 @@ const UploadModal = () => {
 	const {
 		uploadModale: { type, ...rest },
 	} = GlobalContext();
-	const { uploadPostFun, editPostFun } = LocalContext();
+	const { uploadPost: uploadPostFun } = useUploadPost();
+	const { editPost: editPostFun } = useEditPost();
 
 	const [values, setValues] = useState(
 		rest.post_ID ? { ...initStates, ...rest } : initStates

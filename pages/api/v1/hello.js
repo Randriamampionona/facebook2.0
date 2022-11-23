@@ -1,6 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { apiErrorHandler, methodErrorHandler } from "../../utils/errorHandler";
-import checkConnection from "./../../middlewares/checkConnection";
+import {
+	apiErrorHandler,
+	methodErrorHandler,
+} from "../../../utils/errorHandler";
+import checkConnection from "../../../middlewares/checkConnection";
 
 const handler = async (req, res) => {
 	methodErrorHandler?.(req, res, "GET");

@@ -8,7 +8,7 @@ const useLogout = () => {
 
 	const logout = async (data, setData) => {
 		try {
-			const url = apiEndpoint?.("/authorization/logout");
+			const url = "/authorization/logout";
 			const fetch = await axios.patch(url, data, { withCredentials: true });
 			const result = fetch.data;
 

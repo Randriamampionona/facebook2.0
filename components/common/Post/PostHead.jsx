@@ -5,22 +5,16 @@ import { Fragment, useCallback, useState } from "react";
 import { FaGlobeAmericas, FaUserFriends, FaUserLock } from "react-icons/fa";
 import { FiEdit, FiDelete, FiDownload, FiMoreHorizontal } from "react-icons/fi";
 import { ImSpinner7 } from "react-icons/im";
+import { useDelete } from "../../../hooks";
 import { GlobalContext } from "../../../store/contexts/GlobalContext";
-import { LocalContext } from "../../../store/contexts/LocalContext";
 import formatTime from "./../../../utils/formatTime";
 
-const PostHead = ({
-	post_ID,
-	owner,
-	post,
-	w,
-	h,
-	ownerType,
-	openMenu,
-	setOpenMenu,
-}) => {
+const PostHead = (props) => {
+	const { post_ID, owner, post, w, h, ownerType, openMenu, setOpenMenu } =
+		props;
+
 	const { toogleUploadModal } = GlobalContext();
-	const { deletePostFun } = LocalContext();
+	const { deletePost: deletePostFun } = useDelete();
 	const [deleteLoading, setDeleteLoading] = useState(false);
 	const { push } = useRouter();
 

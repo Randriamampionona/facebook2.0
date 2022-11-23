@@ -1,18 +1,15 @@
 import axios from "axios";
+import { Fragment } from "react";
 import { UploadModal } from "../../components/common";
 import { LeftAside, MiddleAside, RightAside } from "../../components/home";
-import { AuthContext } from "../../store/contexts/AuthContext";
 import { GlobalContext } from "../../store/contexts/GlobalContext";
-import { LocalProvider } from "../../store/contexts/LocalContext";
-import apiEndpoint from "../../utils/apiEndpoint";
 import verifyAuth from "../../utils/verifyAuth";
 
-const Home = ({ DATA }) => {
+const Home = ({ user }) => {
 	const { uploadModale } = GlobalContext();
-	const { user } = AuthContext();
 
 	return (
-		<LocalProvider DATA={DATA}>
+		<Fragment>
 			{user && uploadModale.open && <UploadModal />}
 
 			<section className="mySection">
@@ -20,7 +17,7 @@ const Home = ({ DATA }) => {
 				<MiddleAside />
 				<RightAside />
 			</section>
-		</LocalProvider>
+		</Fragment>
 	);
 };
 
@@ -35,9 +32,10 @@ export const getServerSideProps = async ({ req }) => {
 		};
 	}
 
+	const URL = "/post?p=home";
+
 	try {
-		const url = apiEndpoint?.(`/post?p=home`);
-		const fetch = await axios.get(url, {
+		const fetch = await axios.get(URL, {
 			withCredentials: true,
 			headers: {
 				user_id: auth?.props?.user?.user_ID,
@@ -49,14 +47,19 @@ export const getServerSideProps = async ({ req }) => {
 			return {
 				props: {
 					...auth.props,
-					DATA: result.payload,
+					mutateKey: URL,
+					fallback: {
+						[URL]: result,
+					},
 				},
 			};
 		}
 	} catch (error) {
-		console.log({ error });
 		return {
-			DATA: null,
+			...auth.props,
+			fallback: {
+				[URL]: null,
+			},
 		};
 	}
 };

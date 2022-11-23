@@ -1,10 +1,10 @@
 import axios from "axios";
+import { mutate } from "swr";
 import { GlobalContext } from "../../store/contexts/GlobalContext";
-import apiEndpoint from "../../utils/apiEndpoint";
 import toastHandler from "../../utils/toastHandler";
 
 const useUploadPost = () => {
-	const { toogleUploadModal } = GlobalContext();
+	const { mutateKey, toogleUploadModal } = GlobalContext();
 
 	const uploadPost = async (data, setValues) => {
 		setValues((prev) => ({
@@ -13,13 +13,14 @@ const useUploadPost = () => {
 		}));
 
 		try {
-			const url = apiEndpoint("/post/add");
+			const url = "/post/add";
 			const fetch = await axios.post(url, data, { withCredentials: true });
 			const result = fetch.data;
 
 			if (result.success) {
 				toastHandler("success", result.message);
-				return result.snapshot;
+
+				mutate(mutateKey);
 			}
 		} catch (error) {
 			console.log(error);

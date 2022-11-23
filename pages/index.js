@@ -17,7 +17,7 @@ const AuthorizationPage = ({ langList, links, user }) => {
 
 	// client redirect
 	useEffect(() => {
-		replace("/home");
+		user && replace("/home");
 	}, [user]);
 
 	return (

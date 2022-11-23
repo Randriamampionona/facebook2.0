@@ -8,9 +8,9 @@ const Post = ({ ...props }) => {
 	const [openMenu, setOpenMenu] = useState(false);
 
 	const leaveHandler = () => {
-		showReactionBtns && setShowReactionBtns(false)
-		openMenu && setOpenMenu(false)
-	}
+		showReactionBtns && setShowReactionBtns(false);
+		openMenu && setOpenMenu(false);
+	};
 
 	return (
 		<div

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import formValidationinputs from "../../utils/formValidationinputs";
-import apiEndpoint from "./../../utils/apiEndpoint";
 import toastHandler from "./../../utils/toastHandler";
 
 const useSignin = () => {
@@ -28,7 +27,7 @@ const useSignin = () => {
 		setData((prev) => ({ ...prev, loading: true }));
 
 		try {
-			const url = apiEndpoint?.("/authorization/signin");
+			const url = "/authorization/signin";
 			const fecth = await axios.post(url, data, { withCredentials: true });
 			const result = fecth.data;
 
@@ -43,9 +42,7 @@ const useSignin = () => {
 				});
 
 				// redirect
-				setTimeout(() => {
-					replace("/home");
-				}, 1000);
+				replace("/home");
 
 				toastHandler?.("success", result.message);
 

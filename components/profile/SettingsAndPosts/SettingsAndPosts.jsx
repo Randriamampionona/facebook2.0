@@ -1,4 +1,4 @@
-import { LocalContext } from "../../../store/contexts/LocalContext";
+import { useGetPageData } from "../../../hooks";
 import { PostForm } from "../../common/Post";
 import * as Icons from "../../icons/Icons";
 import PostList from "./PostList";
@@ -6,16 +6,16 @@ import Settings from "./Settings";
 
 const SettingsAndPosts = ({ postType }) => {
 	const {
-		DATA: { currentUser },
-	} = LocalContext();
+		data: { payload },
+	} = useGetPageData();
 
 	return (
 		<div className="flex flex-col items-start gap-y-4 w-full">
 			{/* post form */}
-			{currentUser.isMine && <PostForm postType={postType} />}
+			{payload.currentUser.isMine && <PostForm postType={postType} />}
 
 			{/* parametre */}
-			<Settings isMine={currentUser.isMine} />
+			<Settings isMine={payload.currentUser.isMine} />
 
 			{/* my post */}
 			<PostList />
