@@ -32,7 +32,7 @@ const ProfilePage = ({ user }) => {
 
 export default ProfilePage;
 
-export const getServerSideProps = async ({ req }) => {
+export const getServerSideProps = async ({ req, params }) => {
 	const auth = await verifyAuth?.(req);
 
 	if (auth.redirect) {
@@ -41,7 +41,7 @@ export const getServerSideProps = async ({ req }) => {
 		};
 	}
 
-	const URL = `/info/${auth?.props?.user?.user_ID}`;
+	const URL = `/info/${params.user_ID}`;
 
 	try {
 		const fetch = await axios.get(URL, {

@@ -32,9 +32,6 @@ const handler = async (req, res) => {
 		// posts
 		const posts = rowS;
 
-		// set cache
-		res.setHeader("Cache-Control", "s-maxage=86400");
-
 		res.status(200).json({
 			success: true,
 			payload: {
