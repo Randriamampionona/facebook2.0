@@ -1,4 +1,5 @@
 import {
+	TOOGLE_MOBILE_MENU,
 	TOOGLE_PROFILE_MENU,
 	TOOGLE_PROFILE_MODAL,
 	TOOGLE_UPLOAD_MODAL,
@@ -10,6 +11,12 @@ const globalReducer = (state, action) => {
 			return {
 				...state,
 				isProfileMenuOpen: action.payload,
+			};
+
+		case TOOGLE_MOBILE_MENU:
+			return {
+				...state,
+				isMobileMenuOpen: action.payload,
 			};
 
 		case TOOGLE_PROFILE_MODAL:

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { FaPhotoVideo, FaTimes } from "react-icons/fa";
+import { FaPhotoVideo, FaTimes, FaLink } from "react-icons/fa";
 import { AuthContext } from "../../../store/contexts/AuthContext";
 import EmojiPicker from "../Emoji/EmojiPicker";
 
@@ -13,10 +13,10 @@ const MediaInput = ({ values, setValues }) => {
 	const showFilepickerHandler = () => !file && inptRef?.current.click();
 
 	const changeHandler = (file) => {
-		setFile(`/assets/feed-img/${file.name}`);
+		setFile(`/assets/feed-img/${file?.name}`);
 		setValues?.((prev) => ({
 			...prev,
-			content: `/assets/feed-img/${file.name}`,
+			content: `/assets/feed-img/${file?.name}`,
 		}));
 	};
 
@@ -29,6 +29,25 @@ const MediaInput = ({ values, setValues }) => {
 		setValues((prev) => ({
 			...prev,
 			description: e.target.value,
+		}));
+	};
+
+	const promptHandler = (e) => {
+		e.stopPropagation();
+		const url = prompt("Past image address here");
+
+		if (
+			!url?.trim() &&
+			!url?.includes("http://") &&
+			!url?.includes("https://") &&
+			url?.split("")[0] !== "/"
+		)
+			return;
+
+		setFile(url);
+		setValues?.((prev) => ({
+			...prev,
+			content: url,
 		}));
 	};
 
@@ -84,11 +103,19 @@ const MediaInput = ({ values, setValues }) => {
 						</div>
 					)}
 
-					<span
-						className="grid place-items-center absolute right-2 top-2 rounded-full w-6 h-6 text-textLight bg-[#3a3b3c] hover:bg-red-500/30"
-						onClick={removeFileHandler}>
-						<FaTimes />
-					</span>
+					<div className="absolute right-2 top-2 flex flex-col gap-y-2">
+						<span
+							className="grid place-items-center rounded-full w-6 h-6 text-textLight bg-[#3a3b3c] hover:bg-red-500/30"
+							onClick={removeFileHandler}>
+							<FaTimes />
+						</span>
+
+						<span
+							className="grid place-items-center rounded-full w-6 h-6 text-textLight bg-[#3a3b3c] hover:bg-blueNormal/20"
+							onClick={promptHandler}>
+							<FaLink />
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>

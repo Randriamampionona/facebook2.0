@@ -1,17 +1,11 @@
 import { useRouter } from "next/router";
-import { AuthContext } from "../store/contexts/AuthContext";
 
 const NotFoundPage = () => {
 	const { replace } = useRouter();
-	const { user } = AuthContext();
-
 	const backHandler = () => replace("/home");
 
 	return (
-		<section
-			className={`grid items-center justify-center w-full ${
-				user ? "h-[calc(100vh-3.1875rem)]" : "h-screen"
-			}`}>
+		<section className="grid items-center justify-center w-full h-screen">
 			<div className="flex flex-col items-center max-w-md mx-2">
 				<h1 className="font-semibold text-center text-xl mb-1">
 					This Page Isn&apos;t Available Right Now

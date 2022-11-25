@@ -1,9 +1,15 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { GlobalContext } from "../../../store/contexts/GlobalContext";
 import * as Icons from "../../icons/Icons";
 
 const Middle = ({ navMenu }) => {
+	const { isMobileMenuOpen, toogleMobileMenu } = GlobalContext();
 	const { pathname } = useRouter();
+
+	const toogleHandler = () => {
+		toogleMobileMenu(!isMobileMenuOpen);
+	};
 
 	return (
 		<div className="flex-grow flex items-center justify-start sm:justify-center h-full px-2">
@@ -64,8 +70,20 @@ const Middle = ({ navMenu }) => {
 				</Link>
 
 				{/* burger menu */}
-				<li className="group headerMenuIcon text-textLight hover:bg-hoverDark lg:hidden">
+				<li
+					className={`group headerMenuIcon text-textLight lg:hidden ${
+						isMobileMenuOpen
+							? "text-textBlue bg-[#2e89ff0a]"
+							: "text-textLight hover:bg-hoverDark"
+					}`}
+					onClick={toogleHandler}>
 					<Icons.MoreIcon />
+
+					{isMobileMenuOpen && (
+						<span
+							className={`absolute bottom-[-0.1875rem] left-1/2 -translate-x-1/2 w-full h-[0.125rem] bg-blueDark`}
+						/>
+					)}
 
 					<span className="absolute -bottom-9 left-1/2 -translate-x-1/2 bg-textWhite text-dark text-xs px-3 py-[0.4375rem] rounded-md hidden group-hover:block">
 						More

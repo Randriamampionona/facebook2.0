@@ -1,19 +1,17 @@
 const motionVariants = {
-	showsUp: {
+	slidesIn: {
 		initial: {
-			x: "23rem",
+			x: "-100vw",
 		},
 		animate: {
 			x: 0,
+			transition: {
+				type: "tween",
+			},
 		},
 		exit: {
-			x: "23rem",
+			x: "-100vw",
 		},
-	},
-
-	fillsUp: {
-		initial: { width: "0%" },
-		animate: { width: ["0%", "99%"] },
 	},
 };
 
